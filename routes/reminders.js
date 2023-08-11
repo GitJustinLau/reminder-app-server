@@ -62,5 +62,17 @@ router
 
         res.status(200).json(reminder);
     })
+    .delete((req, res) => {
+        const remindersData = getReminders();
+        const currReminderId = req.params.reminderId;
+        const reminderIndex = remindersData.findIndex(reminder => reminder.id === currReminderId);
+
+        if (reminder === -1) {
+            return res.status(404).json({ error: 'reminder not found' });
+        }
+        remindersData.splice(reminderIndex, 1);
+
+        res.status(204).send();
+    })
 
 module.exports = router;
