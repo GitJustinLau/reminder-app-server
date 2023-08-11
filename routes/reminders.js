@@ -17,6 +17,7 @@ const saveReminders = (remindersData) => {
 
 const validateCreateReminder = (req, res, next) => {
     if (!req.body.memo || !req.body.dateReminder) {
+        
         return res.status(400).json({ error: 'Please include memo and date of the new reminder' })
     } else {
         next();
@@ -67,7 +68,7 @@ router
         const currReminderId = req.params.reminderId;
         const reminderIndex = remindersData.findIndex(reminder => reminder.id === currReminderId);
 
-        if (reminder === -1) {
+        if (reminderIndex === -1) {
             return res.status(404).json({ error: 'reminder not found' });
         }
         remindersData.splice(reminderIndex, 1);
