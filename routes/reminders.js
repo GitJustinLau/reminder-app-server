@@ -41,7 +41,7 @@ router
         const newReminder = {
             "id": uuid(),
             ...req.body,
-            "dateCreated": Date.now
+            "dateCreated": Date.now()
         };
 
         remindersData.push(newReminder);
