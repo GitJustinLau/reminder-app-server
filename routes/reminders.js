@@ -16,8 +16,8 @@ const saveReminders = (remindersData) => {
 }
 
 const validateCreateReminder = (req, res, next) => {
-    if (!req.body.title || !req.body.dateReminder) {
-        return res.status(400).json({ error: 'Please include title and date of the new reminder' })
+    if (!req.body.memo || !req.body.dateReminder) {
+        return res.status(400).json({ error: 'Please include memo and date of the new reminder' })
     } else {
         next();
     }
@@ -29,7 +29,7 @@ router
         const remindersData = getReminders().map((reminder) => {
             return {
                 "id": reminder.id,
-                "title": reminder.title,
+                "memo": reminder.memo,
                 "dateReminder": reminder.dateReminder,
                 "dateCreated": reminder.dateCreated
             }
