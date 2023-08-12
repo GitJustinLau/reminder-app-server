@@ -16,7 +16,7 @@ const saveReminders = (remindersData) => {
 }
 
 const validateCreateReminder = (req, res, next) => {
-    if (!req.body.memo || !req.body.dateReminder) {
+    if (!req.body.memo || !req.body.dateReminder || !req.body.time) {
         
         return res.status(400).json({ error: 'Please include memo and date of the new reminder' })
     } else {
@@ -31,6 +31,7 @@ router
             return {
                 "id": reminder.id,
                 "memo": reminder.memo,
+                "time": reminder.time,
                 "dateReminder": reminder.dateReminder,
                 "dateCreated": reminder.dateCreated
             }
@@ -72,7 +73,7 @@ router
             return res.status(404).json({ error: 'reminder not found' });
         }
         remindersData.splice(reminderIndex, 1);
-
+        saveReminders(remindersData)
         res.status(204).send();
     })
 
